@@ -69,5 +69,3 @@ const Hexagon = function Hexagon(width, xOffSet, yOffSet) {
     return poly;
   }
 }
-
-
