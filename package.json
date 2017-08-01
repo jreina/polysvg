@@ -1,0 +1,20 @@
+{
+  "name": "polysvg",
+  "version": "1.0.0",
+  "description": "Generate n-gon SVGs with JS. Has no dependencies but does use ES6.",
+  "main": "hexagon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "uglifyjs n-gon.js -o build/n-gon.min.js -m"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jreina/polysvg.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jreina/polysvg/issues"
+  },
+  "homepage": "https://github.com/jreina/polysvg#readme"
+}
