@@ -22,6 +22,10 @@
       cursor: pointer;
       fill: #00b5ff;
     }
+    .poly {
+      cursor: crosshair;
+      fill: coral;
+    }
   </style>
 </head>
 <body>
@@ -54,12 +58,12 @@
     // Example #1 (decagon)
     let decagon = new Ngon(150, 10, 100, 120);
     let examDecagon = document.getElementById('decagon-example');
-    examDecagon.appendChild(decagon.getPoly());
+    examDecagon.appendChild(decagon.getPoly('poly'));
 
     // Example #2 (triangle)
     let triangle = new Ngon(150, 3, 100, 120);
     let examTriangle = document.getElementById('triangle-example');
-    examTriangle.appendChild(triangle.getPath());
+    examTriangle.appendChild(triangle.getPath('path'));
   </script>
 </body>
 </html>
