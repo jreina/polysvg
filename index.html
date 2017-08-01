@@ -15,14 +15,22 @@
       padding: 20px;
       border-radius: 5px;
     }
+    .comment {
+      color: #00ff00;
+    }
+    .path {
+      cursor: pointer;
+      fill: #00b5ff;
+    }
   </style>
 </head>
 <body>
-  <h1>polysvg.Ngon example <a target="_blank" rel="noopener" href="http://github.com/jreina/polysvg">[polysvg source]</a></h1>
-  
+  <h1>polysvg.Ngon examples <a target="_blank" rel="noopener" href="http://github.com/jreina/polysvg">[polysvg source]</a></h1>
+
   <!-- Example 1 - decagon -->
   <div class="code">
     <code>
+      <span class="comment">// Use .getPoly() to get a polygon element.</span><br />
       let decagon = new Ngon(150, 10, 100, 120);<br />
       let svg = document.getElementById('myVectors');<br />
       svg.appendChild(decagon.getPoly());
@@ -34,23 +42,13 @@
   <!-- Example 2 - rhombus -->
   <div class="code">
     <code>
+      <span class="comment">// Use .getPath to get a path element.</span><br />
       let rhombus = new Ngon(150, 4, 100, 120);<br />
       let examRhombus = document.getElementById('rhombus-example');<br />
       examRhombus.appendChild(rhombus.getPoly());
     </code>
   </div>
-  <svg width="300" height="300" id="rhombus-example">
-  </svg>
-  <hr>
-  <!-- Example 3 - hexagon -->
-  <div class="code">
-    <code>
-      let hexagon = new Ngon(150, 6, 100, 120);<br />
-      let examHexagon = document.getElementById('hexagon-example');<br />
-      examHexagon.appendChild(hexagon.getPoly());
-    </code>
-  </div>
-  <svg width="300" height="300" id="hexagon-example">
+  <svg width="300" height="300" id="triangle-example">
   </svg>
   <script>
     // Example #1 (decagon)
@@ -58,15 +56,10 @@
     let examDecagon = document.getElementById('decagon-example');
     examDecagon.appendChild(decagon.getPoly());
 
-    // Example #2 (rhombus)
-    let rhombus = new Ngon(150, 4, 100, 120);
-    let examRhombus = document.getElementById('rhombus-example');
-    examRhombus.appendChild(rhombus.getPoly());
-
-    // Example #3 (hexagon)
-    let hexagon = new Ngon(150, 6, 100, 120);
-    let examHexagon = document.getElementById('hexagon-example');
-    examHexagon.appendChild(hexagon.getPoly());
+    // Example #2 (triangle)
+    let triangle = new Ngon(150, 3, 100, 120);
+    let examTriangle = document.getElementById('triangle-example');
+    examTriangle.appendChild(triangle.getPath());
   </script>
 </body>
 </html>

@@ -22,7 +22,7 @@ const Ngon = function Ngon(width, vertices, xOffSet, yOffSet) {
   let getXForAngle = theta => (2 * _width * Math.cos(theta)) / Math.sqrt(3);
   let getYForAngle = theta => (2 * _width * Math.sin(theta)) / Math.sqrt(3);
   let rad = deg => deg * Math.PI / 180
-  const points = Array(_geometry.vertices)
+  const points = Array(_geometry.vertices + 1)
     .fill(0)
     .map((val, index) => index)
     .map(index => _geometry.vertexAngle * index)
@@ -42,10 +42,7 @@ const Ngon = function Ngon(width, vertices, xOffSet, yOffSet) {
       let y = vertex.y + _geometry.yOffSet
       return { x, y }
     });
-  let _svgPoints = points
-    .map(val => `${val.x},${val.y}`)
-    .reduce((memo, point) => memo.length? `${memo} ${point}`: point, '')
-    ;
+  
   
   /**
    * A collection of Point objects representing the Ngon.
@@ -59,14 +56,33 @@ const Ngon = function Ngon(width, vertices, xOffSet, yOffSet) {
    * 
    * @method Ngon.getPoly
    * @param {string} cssClass
-   * @param {string} cssId
    */
-  this.getPoly = function getPoly(cssClass = '', cssId = '') {
+  this.getPoly = function getPoly(cssClass) {
+    let pointsAttr = points
+    .map(val => `${val.x},${val.y}`)
+    .reduce((memo, point) => memo.length? `${memo} ${point}`: point, '');
+    
     let poly = document.createElementNS(_elementInfo.svgNS, 'polygon');
-    poly.setAttributeNS(null, 'id', cssId);
     poly.setAttributeNS(null, 'class', cssClass);
-    poly.setAttributeNS(null, 'points', _svgPoints);
-    poly.setAttributeNS(null, 'style', 'fill: #ededed;stroke:black;stroke-width:5;');
+    poly.setAttributeNS(null, 'points', pointsAttr);
     return poly;
+  }
+
+  /**
+   * Generate a path element from the Hexagon.
+   * 
+   * @method Ngon.getPath
+   * @param {string} cssClass
+   */
+  this.getPath = function getPath(cssClass) {
+    let path = document.createElementNS(_elementInfo.svgNS, 'path');
+    let seed = `M ${points[0].x} ${points[1].y}`;
+    let d = points
+    .map(val => `L ${val.x} ${val.y}`)
+    .reduce((memo, point) => `${memo} ${point}`, seed);
+    
+    path.setAttributeNS(null, 'class', cssClass);
+    path.setAttributeNS(null, 'd', d);
+    return path;
   }
 }
