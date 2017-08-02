@@ -27,7 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      - run: npm circleci-build
+      - run: npm run circleci-build
 
       - save_cache:
           paths:
@@ -38,7 +38,7 @@ jobs:
       # - run: yarn test
 
       - store_artifacts:
-          path: ~/polysvg/n-gon.min.js
+          path: /tmp/n-gon.min.js
           destination: ngon
 
 
