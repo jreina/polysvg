@@ -37,4 +37,8 @@ jobs:
       # run tests!
       # - run: yarn test
 
+      - store_artifacts:
+          path: ~/polysvg/tmp/n-gon.min.js
+          destination: ngon
+
 
