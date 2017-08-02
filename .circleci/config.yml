@@ -27,7 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      - run: npm build
+      - run: npm circleci-build
 
       - save_cache:
           paths:
