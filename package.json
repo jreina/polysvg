@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jreina/polysvg/issues"
   },
-  "homepage": "https://github.com/jreina/polysvg#readme"
+  "homepage": "https://github.com/jreina/polysvg#readme",
+  "dependencies": {
+    "uglify-es": "^3.0.27"
+  }
 }
