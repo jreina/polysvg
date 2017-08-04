@@ -21,8 +21,8 @@ const Ngon = function Ngon(width, vertices, xOffSet, yOffSet) {
   
   let getXForAngle = theta => (2 * _width * Math.cos(theta)) / Math.sqrt(3);
   let getYForAngle = theta => (2 * _width * Math.sin(theta)) / Math.sqrt(3);
-  let rad = deg => deg * Math.PI / 180
-  const points = Array(_geometry.vertices + 1)
+  let rad = deg => deg * Math.PI / 180;
+  const points = Array(_geometry.vertices)
     .fill(0)
     .map((val, index) => index)
     .map(index => _geometry.vertexAngle * index)
@@ -40,9 +40,8 @@ const Ngon = function Ngon(width, vertices, xOffSet, yOffSet) {
     .map(vertex => {
       let x = vertex.x + _geometry.xOffSet
       let y = vertex.y + _geometry.yOffSet
-      return { x, y }
+      return { x, y };
     });
-  
   
   /**
    * A collection of Point objects representing the Ngon.
@@ -63,7 +62,7 @@ const Ngon = function Ngon(width, vertices, xOffSet, yOffSet) {
     .reduce((memo, point) => memo.length? `${memo} ${point}`: point, '');
     
     let poly = document.createElementNS(_elementInfo.svgNS, 'polygon');
-    poly.setAttributeNS(null, 'class', cssClass);
+    if(arguments.length) poly.setAttributeNS(null, 'class', cssClass);
     poly.setAttributeNS(null, 'points', pointsAttr);
     return poly;
   }
