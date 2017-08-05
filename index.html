@@ -24,6 +24,9 @@
     .comment {
       color: #00ff00;
     }
+    .preview polygon {
+      fill: #00b5ff;
+    }
   </style>
 </head>
 
@@ -33,40 +36,34 @@
       <h1>Generate a polygon <a target="_blank" rel="noopener" href="http://github.com/jreina/polysvg">[source]</a></h1>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <!-- Settings panel -->
+      <div class="col-md-2">
         <h2>Settings</h2>
         <form action="get" id="poly-builder">
           <div class="form-group">
             <label for="width">Width (in pixels)</label>
-            <input class="form-control" type="number" id="width">
+            <input class="form-control" type="number" id="width" value="150" min="1">
           </div>
           <div class="form-group">
             <label for="vertices">Number of vertices</label>
-            <input class="form-control" type="number" id="vertices">
-          </div>
-          <div class="form-group">
-            <label for="x-offset">X offset (in pixels)</label>
-            <input class="form-control" type="number" id="x-offset">
-          </div>
-          <div class="form-group">
-            <label for="y-offset">Y offset (in pixels)</label>
-            <input class="form-control" type="number" id="y-offset">
+            <input class="form-control" type="number" id="vertices" value="6" min="3">
           </div>
           <button class="btn btn-primary" type="submit">Generate</button>
         </form>
       </div>
+      <!-- Output column -->
       <div class="col-md-4">
         <h2>Output</h2>
         <!-- Example 1 - decagon -->
         <div class="code">
+          <span class="comment">// Create your poly using the form to the left.</span>
           <div id="output">
-            <span class="comment">// Create your poly using the form to the left.</span>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <!-- Preview column -->
+      <div class="col-md-6" id="col-preview">
         <h2>Preview</h2>
-        <svg width="300" height="300" id="poly-preview">
       </div>
     </div>
   </div>
@@ -75,20 +72,33 @@
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      let target = event.target;
+      let { target } = event;
       let output = document.getElementById('output');
-      let preview = document.getElementById('poly-preview');
+      let preview = document.getElementById('col-preview');
 
+      // Read form
       let width = Number.parseInt(target.width.value);
       let vertices = Number.parseInt(target.vertices.value);
-      let xOffset = Number.parseInt(target['x-offset'].value);
-      let yOffset = Number.parseInt(target['y-offset'].value);
-      let gon = new Ngon(width, vertices, xOffset, yOffset);
 
-      output.innerText = gon.getPoly().outerHTML;
-      preview.innerHTML = '';
-      preview.appendChild(gon.getPoly());
-    })
+      // Get poly info
+      let gon = new Ngon(width, vertices);
+      let svg = gon.getSvg();
+
+      // Add a click handler to remove a poly
+      svg.addEventListener('click', event => {
+        svg.parentNode.removeChild(svg);
+        output.innerText = '<poof! /><gon! />';
+      });
+
+      // Set the output text
+      output.innerText = svg.outerHTML;
+
+      // Add a class so we can style the preview
+      svg.setAttributeNS(null, 'class', 'preview');
+
+      // Finally, add the svg element to the preview column
+      preview.appendChild(svg);
+    });
   </script>
 </body>
 
